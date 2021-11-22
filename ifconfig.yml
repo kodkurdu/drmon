@@ -1,0 +1,6 @@
+---
+- name: ifconfig
+  hosts: all
+  tasks:
+  - name: ip aliniyor
+    shell: ifconfig
