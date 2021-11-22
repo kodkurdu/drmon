@@ -1,6 +1,6 @@
 ---
-- name: ipconfig
+- name: route tablosu
   hosts: all
   tasks:
-  - name: ip alinıyor
-    win_shell: ipconfig
+  - name: ip route
+    shell: ip r
