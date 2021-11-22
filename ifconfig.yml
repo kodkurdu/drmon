@@ -3,4 +3,4 @@
   hosts: all
   tasks:
   - name: ip aliniyor
-    shell: ip
+    shell: ip a
