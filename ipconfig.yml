@@ -1,0 +1,6 @@
+---
+- name: ipconfig
+  hosts: all
+  tasks:
+  - name: ip alinıyor
+    win_shell: ipconfig
