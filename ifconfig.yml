@@ -2,5 +2,43 @@
 - name: ifconfig
   hosts: all
   tasks:
-  - name: ip aliniyor
-    shell: ip a
+  - name: launch job
+  hosts: all
+  ignore_errors: yes
+  tasks:
+  
+  - name: update step status
+    uri:
+      url: "{{ drmon_api }}/jobs/updateStep/{{ drmonJobID }}"
+      method: PUT
+      headers:
+        Authorization: "{{ drmonToken }}"
+      body_format: json
+      body: '{ "dsid": "5", "status": "IN PROGRESS" }'
+      force_basic_auth: no
+      validate_certs: False
+    register: content
+    until: content.status == 200
+    delegate_to: localhost
+    
+  - name: sleep for 300 seconds and continue with play
+    wait_for:
+      timeout: 30
+    delegate_to: localhost
+
+  
+    
+  - name: update step status
+    uri:
+      url: "{{ drmon_api }}/jobs/updateStep/{{ drmonJobID }}"
+      method: PUT
+      headers:
+        Authorization: "{{ drmonToken }}"
+      body_format: json
+      body: '{ "dsid": "5", "status": "SUCCESS", "log": "{{sonuc}}"}'
+      force_basic_auth: no
+      validate_certs: False
+    register: content
+    until: content.status == 200
+    delegate_to: localhost
+  
