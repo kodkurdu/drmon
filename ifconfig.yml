@@ -2,10 +2,6 @@
 - name: ifconfig
   hosts: all
   tasks:
-  - name: launch job
-  hosts: all
-  ignore_errors: yes
-  tasks:
   
   - name: update step status
     uri:
