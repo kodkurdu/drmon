@@ -14,7 +14,7 @@
       headers:
         Authorization: "{{ drmonToken }}"
       body_format: json
-      body: '{ "dsid": "5", "status": "IN PROGRESS" }'
+      body: '{ "dsid": "{{ dsid }}", "status": "IN PROGRESS" }'
       force_basic_auth: no
       validate_certs: False
     register: content
@@ -25,6 +25,10 @@
     wait_for:
       timeout: 30
     delegate_to: localhost
+    
+  - name: ip bilgisi
+    shell: ip a
+    register: sonuc
 
   
     
@@ -35,7 +39,7 @@
       headers:
         Authorization: "{{ drmonToken }}"
       body_format: json
-      body: '{ "dsid": "5", "status": "SUCCESS", "log": "{{sonuc}}"}'
+      body: '{ "dsid": "{{ dsid }}", "status": "SUCCESS", "log": "{{ sonuc }}"}'
       force_basic_auth: no
       validate_certs: False
     register: content
